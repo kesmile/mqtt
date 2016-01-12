@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React.js</title>
+  </head>
+  <body>
+    <div id="example">
+      <button type="button" id="send-btn" name="button">Aceptar</button>
+    </div>
+  <script src="bower_components/react/react.min.js"></script>
+  <script src="bower_components/react/react-dom.min.js"></script>
+  <script src="bower_components/requirejs-react-jsx/babel-5.8.34.min.js"></script>
+  <script src="bower_components/bower-mqttws/mqttws31.js"></script>
+  <script type="text/javascript">
+
+  var client = new Paho.MQTT.Client( 'localhost', 3000, 'clientId');
+
+      client.onConnectionLost = onConnectionLost;
+      client.onMessageArrived = onMessageArrived;
+      var options = {
+            onSuccess: onConnect,
+            onFailure: onFail
+      };
+      options.userName = 'test';
+      options.password = '1234';
+      client.connect(options);
+
+      function onConnect() {
+        // Once a connection has been made, make a subscription and send a message.
+        console.log("onConnect");
+        client.subscribe("/World", {qos: 0});
+        //message = new Paho.MQTT.Message("Hello");
+        //message.destinationName = "/World";
+        //client.send(message);
+      };
+      function onFail(message){
+        console.log("Connection failed: " + message.errorMessage + "Retrying");
+      }
+      function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0)
+        console.log("onConnectionLost:"+responseObject.errorMessage);
+      };
+      function onMessageArrived(message) {
+        var topic = message.destinationName;
+        var payload = message.payloadString;
+        console.log(topic + ' = ' + payload);
+    };
+    document.getElementById('send-btn').onclick = function(){
+      message = new Paho.MQTT.Message("Hello web page");
+      message.destinationName = "/World";
+      client.send(message);
+      console.log('send message');
+    }
+    </script>
+  </body>
+</html>

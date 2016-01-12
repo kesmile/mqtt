@@ -1,0 +1,28 @@
+{
+  "name": "react.js",
+  "description": "test react.js",
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "test",
+    "react.js"
+  ],
+  "authors": [
+    "kelvi padilla"
+  ],
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.14.6",
+    "requirejs-react-jsx": "~1.0.2"
+  }
+}

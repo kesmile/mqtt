@@ -1,0 +1,4 @@
+mosca/node_modules/*
+mqtt/node_modules/*
+web_socket/node_modules/*
+web_socket/bower_components/*
